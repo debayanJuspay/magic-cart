@@ -1,6 +1,7 @@
 import type { EntryContext, AppLoadContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-import { renderToReadableStream } from "react-dom/server";
+import { renderToPipeableStream } from "react-dom/server";
+import { PassThrough } from "stream";
 import isbot from "isbot";
 
 export default async function handleRequest(
@@ -17,25 +18,38 @@ export default async function handleRequest(
     "frame-ancestors https://*.shopify.com https://admin.shopify.com;"
   );
 
-  const body = await renderToReadableStream(
-    <RemixServer context={remixContext} url={request.url} />,
-    {
-      signal: request.signal,
-      onError(error: unknown) {
-        console.error(error);
-        responseStatusCode = 500;
-      },
-    }
-  );
+  return new Promise((resolve, reject) => {
+    let didError = false;
 
-  if (isbot(request.headers.get("user-agent"))) {
-    await body.allReady;
-  }
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer context={remixContext} url={request.url} />,
+      {
+        onShellReady() {
+          const body = new PassThrough();
 
-  responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("Content-Type", "text/html");
 
-  return new Response(body, {
-    headers: responseHeaders,
-    status: responseStatusCode,
+          resolve(
+            new Response(body as any, {
+              headers: responseHeaders,
+              status: didError ? 500 : responseStatusCode,
+            })
+          );
+
+          pipe(body);
+        },
+        onShellError(error: unknown) {
+          reject(error);
+        },
+        onError(error: unknown) {
+          didError = true;
+          console.error(error);
+        },
+      }
+    );
+
+    setTimeout(() => {
+      abort();
+    }, 5000);
   });
 }
