@@ -1,0 +1,18 @@
+<!-- Cart Drawer App Embed -->
+<script>
+  window.CartDrawerConfig = {
+    enabled: true,
+    endpoint: '{{ shop.url }}/apps/cart-drawer'
+  };
+</script>
+
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "target": "body",
+  "settings": []
+}
+{% endschema %}

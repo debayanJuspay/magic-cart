@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "f8f030c9ad8726df8695556bff710c75"
-name = "CART DRAWER <> DEBAYAN"
-handle = "debayan-magic-cart"
-application_url = "https://example.com"
+name = "cart-wee"
+handle = "cart-wee"
+application_url = "https://cellular-payday-phrases-school.trycloudflare.com"
 embedded = true
 
 [webhooks]
@@ -15,9 +15,9 @@ scopes = "read_products,write_products,read_orders,write_discounts,read_inventor
 
 [auth]
 redirect_urls = [
-  "https://your-app-url.ngrok.app/auth/callback",
-  "https://your-app-url.ngrok.app/auth/shopify/callback",
-  "https://your-app-url.ngrok.app/api/auth/callback"
+  "https://cellular-payday-phrases-school.trycloudflare.com/auth/callback",
+  "https://cellular-payday-phrases-school.trycloudflare.com/auth/shopify/callback",
+  "https://cellular-payday-phrases-school.trycloudflare.com/api/auth/callback"
 ]
 
 [build]

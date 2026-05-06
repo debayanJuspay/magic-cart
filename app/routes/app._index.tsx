@@ -13,8 +13,8 @@ import {
   Button,
 } from "@shopify/polaris";
 import {
-  ProductsIcon,
-  GiftIcon,
+  ProductIcon,
+  GiftCardIcon,
   ImageIcon,
   SettingsIcon,
 } from "@shopify/polaris-icons";
@@ -43,14 +43,14 @@ export default function Index() {
     {
       title: "Active Upsells",
       count: upsellCount,
-      icon: ProductsIcon,
+      icon: ProductIcon,
       tone: "success" as const,
       link: "/app/upsells",
     },
     {
       title: "Free Gift Rules",
       count: giftCount,
-      icon: GiftIcon,
+      icon: GiftCardIcon,
       tone: "info" as const,
       link: "/app/gifts",
     },
