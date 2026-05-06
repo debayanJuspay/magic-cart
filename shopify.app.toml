@@ -1,8 +1,10 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "f8f030c9ad8726df8695556bff710c75"
-name = "Cart Drawer App"
-handle = "cart-drawer-app"
+name = "CART DRAWER <> DEBAYAN"
+handle = "debayan-magic-cart"
+application_url = "https://example.com"
+embedded = true
 
 [webhooks]
 api_version = "2024-01"
