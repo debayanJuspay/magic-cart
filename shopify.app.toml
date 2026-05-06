@@ -3,7 +3,7 @@
 client_id = "f8f030c9ad8726df8695556bff710c75"
 name = "cart-wee"
 handle = "cart-wee"
-application_url = "https://cellular-payday-phrases-school.trycloudflare.com"
+application_url = "https://magic-cart-1.vercel.app"
 embedded = true
 
 [webhooks]
@@ -15,9 +15,9 @@ scopes = "read_products,write_products,read_orders,write_discounts,read_inventor
 
 [auth]
 redirect_urls = [
-  "https://cellular-payday-phrases-school.trycloudflare.com/auth/callback",
-  "https://cellular-payday-phrases-school.trycloudflare.com/auth/shopify/callback",
-  "https://cellular-payday-phrases-school.trycloudflare.com/api/auth/callback"
+  "https://magic-cart-1.vercel.app/auth/callback",
+  "https://magic-cart-1.vercel.app/auth/shopify/callback",
+  "https://magic-cart-1.vercel.app/api/auth/callback"
 ]
 
 [build]
