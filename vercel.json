@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run vercel-build",
+  "outputDirectory": "build",
   "framework": "remix",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "regions": ["iad1"],
   "rewrites": [
     {
