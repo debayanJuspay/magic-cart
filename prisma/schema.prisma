@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id                   String    @id
+  shop                 String
+  state                String
+  isOnline             Boolean   @default(false)
+  scope                String?
+  expiresAt            DateTime?
+  accessToken          String
+  userId               BigInt?
+  firstName            String?
+  lastName             String?
+  email                String?
+  accountOwner         Boolean   @default(false)
+  locale               String?
+  collaborator         Boolean?  @default(false)
+  emailVerified        Boolean?  @default(false)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}
+
+model UpsellRule {
+  id          String   @id @default(uuid())
+  shop        String
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+  priority    Int      @default(0)
+
+  // Trigger conditions
+  triggerType     String // "product", "collection", "cart_value", "always"
+  triggerProducts String? // Comma-separated product IDs
+  triggerCollections String? // Comma-separated collection IDs
+  minCartValue    Float?
+
+  // Upsell offers
+  offerType       String // "product", "variant"
+  offerProducts   String // Comma-separated product/variant IDs
+  offerLimit      Int    @default(1)
+  discountPercent Float? // Optional discount on upsell
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([shop])
+  @@index([isActive])
+}
+
+model FreeGiftRule {
+  id          String   @id @default(uuid())
+  shop        String
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+
+  // Gift product
+  giftProductId    String
+  giftVariantId    String?
+  giftQuantity     Int    @default(1)
+  allowMultiple    Boolean @default(false)
+
+  // Condition to trigger gift
+  conditionType    String // "cart_value", "product_purchase", "coupon_code"
+  minCartValue     Float?
+  requiredProducts String? // Comma-separated product IDs
+  requiredCoupon   String?
+
+  // Display settings
+  displayAsLocked  Boolean @default(true)
+  customMessage    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([shop])
+  @@index([isActive])
+}
+
+model Banner {
+  id          String   @id @default(uuid())
+  shop        String
+  name        String
+  isActive    Boolean  @default(true)
+  priority    Int      @default(0)
+
+  // Content
+  content     String
+  textColor   String   @default("#FFFFFF")
+  bgColor     String   @default("#000000")
+  icon        String?  // emoji or icon name
+
+  // Display conditions
+  displayType String // "always", "cart_value_progress", "product_based"
+  targetValue Float? // For progress bars (e.g., $50 for free shipping)
+
+  // Position
+  position    String   @default("top") // "top", "bottom", "above_items"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([shop])
+  @@index([isActive])
+}
+
+model ShopSettings {
+  id                    String   @id @default(uuid())
+  shop                  String   @unique
+  cartDrawerEnabled     Boolean  @default(true)
+  drawerPosition        String   @default("right") // "left", "right"
+  primaryColor          String   @default("#008060")
+  showRecommendations   Boolean  @default(true)
+  maxRecommendations    Int      @default(3)
+  enableCoupons         Boolean  @default(true)
+  enableNotes           Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([shop])
+}

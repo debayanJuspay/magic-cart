@@ -1,0 +1,23 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "YOUR_CLIENT_ID_HERE"
+name = "Cart Drawer App"
+handle = "cart-drawer-app"
+
+[webhooks]
+api_version = "2024-01"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_products,write_products,read_orders,write_discounts,read_inventory"
+
+[auth]
+redirect_urls = [
+  "https://your-app-url.ngrok.app/auth/callback",
+  "https://your-app-url.ngrok.app/auth/shopify/callback",
+  "https://your-app-url.ngrok.app/api/auth/callback"
+]
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true

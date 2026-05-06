@@ -1,0 +1,22 @@
+name = "Cart Drawer"
+type = "theme"
+
+[[extensions]]
+name = "Cart Drawer App"
+handle = "cart-drawer-app"
+type = "theme_app_extension"
+
+[[extensions.settings]]
+name = "Enable Cart Drawer"
+type = "checkbox"
+id = "enabled"
+default = "true"
+description = "Enable or disable the custom cart drawer"
+
+[[extensions.blocks]]
+name = "Cart Drawer Embed"
+type = "@app"
+handle = "cart-drawer-embed"
+target = "body"
+script = "cart-drawer.js"
+stylesheet = "cart-drawer.css"

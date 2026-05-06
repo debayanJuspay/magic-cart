@@ -1,0 +1,27 @@
+node_modules
+
+/.cache
+/build
+/public/build
+.env
+*.log
+
+# Database
+*.sqlite
+*.db
+
+# Shopify
+shopify.app.*.toml
+.shopify
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Testing
+coverage/
